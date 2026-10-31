@@ -1,0 +1,726 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A developer blog about coding, technology, open source and building things.">
+<title>DevBlog — Ideas, Code & Creativity</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --green: #3fb950;
+  --blue: #58a6ff;
+  --purple: #bc8cff;
+}
+
+.light {
+  --bg: #ffffff;
+  --surface: #f6f8fa;
+  --surface2: #eaeef2;
+  --border: #d0d7de;
+  --text: #1f2328;
+  --muted: #656d76;
+  --green: #1a7f37;
+  --blue: #0969da;
+  --purple: #8250df;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  transition: background .25s, color .25s;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  width: min(1100px, 90%);
+  margin: auto;
+}
+
+/* NAVBAR */
+
+nav {
+  height: 72px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span { color: var(--green); }
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.nav-links a:hover { color: var(--green); }
+
+.theme-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+  padding: 100px 0 85px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(63,185,80,.10), transparent 65%);
+}
+
+.terminal {
+  display: inline-block;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 8px 15px;
+  border-radius: 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--green);
+  margin-bottom: 25px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 7vw, 68px);
+  letter-spacing: -3px;
+  line-height: 1.12;
+  margin-bottom: 20px;
+}
+
+.hero h1 span { color: var(--green); }
+
+.hero p {
+  color: var(--muted);
+  max-width: 590px;
+  margin: auto;
+  font-size: 16px;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 11px 20px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: .2s;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: #06150a;
+  border-color: var(--green);
+}
+
+.btn-primary:hover { opacity: .85; }
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.btn-secondary:hover { border-color: var(--green); }
+
+/* STATS */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 35px 0 65px;
+}
+
+.stat {
+  padding: 20px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.stat h2 { font-size: 25px; }
+.stat p { font-size: 12px; color: var(--muted); }
+
+/* CONTENT */
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+
+.section-heading h2 {
+  font-size: 24px;
+  letter-spacing: -1px;
+}
+
+.featured {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 65px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.featured-label {
+  color: var(--green);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.featured h2 {
+  font-size: 27px;
+  line-height: 1.3;
+  margin: 12px 0;
+}
+
+.featured p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.featured-visual {
+  min-height: 190px;
+  background: linear-gradient(135deg, #102c20, #172b46);
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  font-size: 65px;
+}
+
+/* SEARCH */
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.search {
+  flex: 1;
+  min-width: 200px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 7px;
+  padding: 11px 14px;
+  outline: none;
+  font-family: inherit;
+}
+
+.search:focus { border-color: var(--blue); }
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 7px;
+  padding: 9px 13px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.filter.active {
+  color: var(--green);
+  border-color: var(--green);
+  background: rgba(63,185,80,.08);
+}
+
+/* BLOG CARDS */
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 70px;
+}
+
+.blog-card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 22px;
+  border-radius: 10px;
+  transition: .2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--green);
+}
+
+.card-icon {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.category {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.blog-card h3 {
+  font-size: 17px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.blog-card p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.card-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.read-more {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.empty {
+  display: none;
+  text-align: center;
+  color: var(--muted);
+  padding: 35px;
+}
+
+/* NEWSLETTER */
+
+.newsletter {
+  text-align: center;
+  padding: 55px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 75px;
+}
+
+.newsletter h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.newsletter p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 23px;
+}
+
+.newsletter-form {
+  display: flex;
+  max-width: 430px;
+  margin: auto;
+  gap: 8px;
+}
+
+.newsletter-form input {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 12px;
+  color: var(--text);
+  outline: none;
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+footer a:hover { color: var(--green); }
+
+@media(max-width: 800px) {
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .featured { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 550px) {
+  .nav-links { gap: 12px; font-size: 12px; }
+  .nav-links a:nth-child(2) { display: none; }
+  .hero { padding: 75px 0; }
+  .hero h1 { letter-spacing: -2px; }
+  .stats { gap: 8px; }
+  .stat { padding: 14px 5px; }
+  .stat h2 { font-size: 20px; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .newsletter-form { flex-direction: column; }
+  .section-heading { align-items: flex-start; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="container nav-content">
+    <a href="#" class="logo">dev<span>blog.</span></a>
+
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#articles">Articles</a>
+      <a href="#about">About</a>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">☀️</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="terminal">~/developer/blog $ hello_world</div>
+
+    <h1>Ideas. Code.<br><span>Everything in between.</span></h1>
+
+    <p>
+      A little corner of the internet where I share what I'm learning,
+      building, and discovering in the world of technology.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#articles" class="btn btn-primary">Explore Articles →</a>
+      <a href="#about" class="btn btn-secondary">About Me</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat">
+      <h2>25+</h2>
+      <p>Articles Published</p>
+    </div>
+    <div class="stat">
+      <h2>10K+</h2>
+      <p>Monthly Readers</p>
+    </div>
+    <div class="stat">
+      <h2>100%</h2>
+      <p>Open Source Mindset</p>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section>
+    <div class="section-heading">
+      <h2>Featured Article</h2>
+      <span class="category">Editor's Pick</span>
+    </div>
+
+    <article class="featured">
+      <div>
+        <div class="featured-label">✦ Featured · Web Development</div>
+        <h2>How I Built My First Website From Scratch</h2>
+        <p>
+          A journey through HTML, CSS, JavaScript, and the lessons
+          I learned while building my first real-world project.
+        </p>
+        <br>
+        <a href="#articles" class="read-more">Read the article →</a>
+      </div>
+
+      <div class="featured-visual">💻</div>
+    </article>
+  </section>
+
+  <!-- ARTICLES -->
+  <section id="articles">
+    <div class="section-heading">
+      <h2>Latest Articles</h2>
+      <span class="category">Fresh from the blog</span>
+    </div>
+
+    <div class="controls">
+      <input
+        type="search"
+        class="search"
+        id="searchInput"
+        placeholder="⌕ Search articles..."
+        aria-label="Search articles"
+      >
+
+      <div class="filters">
+        <button class="filter active" data-category="all">All</button>
+        <button class="filter" data-category="web">Web Dev</button>
+        <button class="filter" data-category="javascript">JavaScript</button>
+        <button class="filter" data-category="tools">Tools</button>
+      </div>
+    </div>
+
+    <div class="blog-grid" id="blogGrid">
+
+      <article class="blog-card" data-category="web">
+        <div class="card-icon">🌐</div>
+        <div class="category">Web Development</div>
+        <h3>Understanding How the Internet Works</h3>
+        <p>A beginner-friendly guide to browsers, servers, DNS, and HTTP.</p>
+        <div class="card-footer">
+          <span>Oct 25, 2026 · 5 min</span>
+          <a href="#" class="read-more">Read →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="javascript">
+        <div class="card-icon">⚡</div>
+        <div class="category">JavaScript</div>
+        <h3>10 JavaScript Concepts Every Developer Should Know</h3>
+        <p>Explore closures, promises, async/await, scope, and more.</p>
+        <div class="card-footer">
+          <span>Oct 20, 2026 · 8 min</span>
+          <a href="#" class="read-more">Read →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="tools">
+        <div class="card-icon">🛠️</div>
+        <div class="category">Developer Tools</div>
+        <h3>My Favorite Tools for Modern Developers</h3>
+        <p>A collection of tools that make everyday development easier.</p>
+        <div class="card-footer">
+          <span>Oct 15, 2026 · 4 min</span>
+          <a href="#" class="read-more">Read →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="web">
+        <div class="card-icon">🎨</div>
+        <div class="category">Web Development</div>
+        <h3>CSS Tricks That Will Make Your Website Better</h3>
+        <p>Discover useful CSS techniques for beautiful responsive websites.</p>
+        <div class="card-footer">
+          <span>Oct 10, 2026 · 6 min</span>
+          <a href="#" class="read-more">Read →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="javascript">
+        <div class="card-icon">🚀</div>
+        <div class="category">JavaScript</div>
+        <h3>Build Interactive Websites With Vanilla JavaScript</h3>
+        <p>Learn how to add powerful interactions without frameworks.</p>
+        <div class="card-footer">
+          <span>Oct 05, 2026 · 7 min</span>
+          <a href="#" class="read-more">Read →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="tools">
+        <div class="card-icon">🐙</div>
+        <div class="category">Developer Tools</div>
+        <h3>Getting Started With Git and GitHub</h3>
+        <p>Learn version control and how to publish your projects online.</p>
+        <div class="card-footer">
+          <span>Sep 28, 2026 · 5 min</span>
+          <a href="#" class="read-more">Read →</a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="empty" id="emptyMessage">
+      No articles found. Try another search.
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="newsletter" id="about">
+    <h2>Stay curious. Keep building. ✨</h2>
+    <p>
+      Enjoying the content? Subscribe to get updates about
+      new articles, projects, and developer tips.
+    </p>
+
+    <form class="newsletter-form" id="subscribeForm">
+      <input
+        type="email"
+        placeholder="Enter your email address"
+        aria-label="Email address"
+        required
+      >
+      <button type="submit" class="btn btn-primary">Subscribe →</button>
+    </form>
+
+    <p id="subscribeMessage" style="margin-top:15px"></p>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-content">
+    <span>© 2026 devblog. Built with ❤️ and code.</span>
+    <div>
+      <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
+      &nbsp; · &nbsp;
+      <a href="#articles">Articles</a>
+      &nbsp; · &nbsp;
+      <a href="#about">About</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Theme toggle
+const themeBtn = document.getElementById('themeBtn');
+
+themeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+
+  themeBtn.textContent =
+    document.body.classList.contains('light') ? '🌙' : '☀️';
+});
+
+// Search and category filtering
+const searchInput = document.getElementById('searchInput');
+const cards = [...document.querySelectorAll('.blog-card')];
+const filters = document.querySelectorAll('.filter');
+const emptyMessage = document.getElementById('emptyMessage');
+
+let selectedCategory = 'all';
+
+function filterArticles() {
+  const query = searchInput.value.toLowerCase();
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const matchesSearch = card.innerText.toLowerCase().includes(query);
+    const matchesCategory =
+      selectedCategory === 'all' ||
+      card.dataset.category === selectedCategory;
+
+    const visible = matchesSearch && matchesCategory;
+
+    card.style.display = visible ? 'flex' : 'none';
+
+    if (visible) visibleCount++;
+  });
+
+  emptyMessage.style.display =
+    visibleCount === 0 ? 'block' : 'none';
+}
+
+searchInput.addEventListener('input', filterArticles);
+
+filters.forEach(button => {
+  button.addEventListener('click', () => {
+    filters.forEach(btn => btn.classList.remove('active'));
+
+    button.classList.add('active');
+    selectedCategory = button.dataset.category;
+
+    filterArticles();
+  });
+});
+
+// Newsletter demo
+document.getElementById('subscribeForm')
+  .addEventListener('submit', event => {
+    event.preventDefault();
+
+    document.getElementById('subscribeMessage').textContent =
+      '🎉 Thanks for subscribing! This is a demo form.';
+
+    event.target.reset();
+  });
+</script>
+
+</body>
+</html>
